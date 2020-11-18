@@ -1,0 +1,12 @@
+.App {
+    display: flex;
+    text-align: center;
+}
+
+.list {
+    width: 70%;
+}
+
+.control {
+    margin-top: 100px;
+}
