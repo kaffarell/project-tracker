@@ -31,7 +31,7 @@ class App extends React.Component {
             description: this.state.inputDescription,
             members: this.state.inputMembers,
         }
-        fetch('http://localhost:3000/newproject', {
+        fetch(window.location.href + 'newproject', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

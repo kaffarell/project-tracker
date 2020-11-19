@@ -23,7 +23,7 @@ class ProjectElement extends React.Component {
         let p = {
             title: this.props.title,
         }
-        fetch('http://localhost:3000/deleteproject', {
+        fetch(window.location.href + 'deleteproject', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
