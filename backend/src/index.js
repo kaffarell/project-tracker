@@ -1,8 +1,19 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
-const dbHandler = require('./db/dbHandler');
+const Project = require('./model/project.model');
 
 const app = express();
+
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true}
+);
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log("MongoDB database connection established");
+});
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "..", "build")));
@@ -12,22 +23,27 @@ const port = process.env.PORT || 3000;
 
 
 app.get("/getprojects", (req, res) => {
-    let handler = new dbHandler();
-    handler.getAllProjects((result) => {
-        res.send(result);
-    })
+    Project.find()
+        .then(users => res.json(users))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 app.post("/newproject", (req, res) => {
-    let handler = new dbHandler();
-    handler.createProject(req.body.title, req.body.description, req.body.members);
-    res.end('OK');
+    const title = req.body.title;
+    const description = req.body.description;
+    const members = req.body.members;
+
+    const newProject = new Project({title, description, members});
+
+    newProject.save()
+        .then(() => res.status(200).end('OK'))
+        .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 app.post("/deleteproject", (req, res) => {
-    let handler = new dbHandler();
-    handler.deleteProject(req.body.title);
-    res.send('OK');
+    Project.findOneAndRemove({title: req.body.title})
+        .then(() => res.status(200).end('OK'))
+        .catch((err) => res.status(400).end(err));
 });
 
 app.listen(port, () => {

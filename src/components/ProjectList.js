@@ -31,7 +31,6 @@ class ProjectList extends React.Component {
         fetch('http://localhost:3000/getprojects')
             .then(response => response.json())
             .then((data) => {
-                console.log(data);
                 for(let i = 0; i < data.length; i++) {
                     let p = new Project(data[i].title, data[i].description, data[i].members);
                     processedArray.push(p);
