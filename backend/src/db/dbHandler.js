@@ -17,7 +17,7 @@ class dbHandler {
 
     createProject(title, description, members) {
         // Insert data in database
-        this.db.run(`INSERT INTO Projects VALUES ('${title}', ${description}, '${members}');`, (err) => {
+        this.db.run(`INSERT INTO Projects VALUES ('${title}', '${description}', '${members}');`, (err) => {
             if(err){
                 console.log('Error: ' + err);
             }

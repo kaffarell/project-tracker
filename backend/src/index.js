@@ -4,6 +4,7 @@ const dbHandler = require('./db/dbHandler');
 
 const app = express();
 
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "..", "build")));
 app.use(express.static("public"));
 
@@ -17,7 +18,11 @@ app.get("/getprojects", (req, res) => {
     })
 });
 
-//app.post("/newproject");
+app.post("/newproject", (req, res) => {
+    let handler = new dbHandler();
+    handler.createProject(req.body.title, req.body.description, req.body.members);
+    res.end('OK');
+});
 
 app.listen(port, () => {
     console.log("Server available at port: " + port);
