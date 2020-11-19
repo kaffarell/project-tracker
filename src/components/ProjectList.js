@@ -28,7 +28,7 @@ class ProjectList extends React.Component {
 
     getProjects() {
         let processedArray = [];
-        fetch('http://localhost:3000/getprojects')
+        fetch(window.location.href + 'getprojects')
             .then(response => response.json())
             .then((data) => {
                 for(let i = 0; i < data.length; i++) {
