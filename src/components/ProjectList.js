@@ -9,20 +9,6 @@ class ProjectList extends React.Component {
         this.state = {
             projects: []
         }
-
-        // Example values
-        /*
-        let p1 = new Project("Arduino", "Arduino electronic stuff", "Johannes, Luca");
-        let p2 = new Project("raspberry pi", "Alles sochen mit n rospberry", "Daniel, Peter");
-        let p3 = new Project("Rust", "Alles über der Sprache Rust", "Gabriel");
-        let p4 = new Project("Java", "Alles über Java", "Tobias, Lukas");
-        let newArray = this.state.projects;
-        newArray.push(p1);
-        newArray.push(p2);
-        newArray.push(p3);
-        newArray.push(p4);
-        this.setState({projects: newArray});
-        */
     }
 
     renderList() {
@@ -30,7 +16,10 @@ class ProjectList extends React.Component {
         let elements = this.state.projects;
         for (let i = 0; i < elements.length; i++) {
             jsxElements.push(
-                <ProjectElement title={elements[i].title} description={elements[i].description} members={elements[i].members}>
+                <ProjectElement title={elements[i].title} 
+                description={elements[i].description} 
+                members={elements[i].members}
+                update={this.getProjects}>
                 </ProjectElement>
             )
         }
@@ -55,6 +44,10 @@ class ProjectList extends React.Component {
     }
 
     componentDidMount() {
+        this.getProjects();
+    }
+
+    componentDidUpdate() {
         this.getProjects();
     }
 
