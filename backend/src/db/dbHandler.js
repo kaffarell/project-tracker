@@ -23,6 +23,14 @@ class dbHandler {
             }
         });
     }
+
+    deleteProject(title) {
+        this.db.run(`DELETE FROM Projects WHERE title='${title}'`, (err => {
+                if(err) {
+                    console.log('Error: ' + err);
+                }
+        }));
+    }
 }
 
 module.exports = dbHandler;

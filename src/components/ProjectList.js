@@ -11,6 +11,7 @@ class ProjectList extends React.Component {
         }
 
         // Example values
+        /*
         let p1 = new Project("Arduino", "Arduino electronic stuff", "Johannes, Luca");
         let p2 = new Project("raspberry pi", "Alles sochen mit n rospberry", "Daniel, Peter");
         let p3 = new Project("Rust", "Alles über der Sprache Rust", "Gabriel");
@@ -21,6 +22,7 @@ class ProjectList extends React.Component {
         newArray.push(p3);
         newArray.push(p4);
         this.setState({projects: newArray});
+        */
     }
 
     renderList() {
@@ -33,6 +35,27 @@ class ProjectList extends React.Component {
             )
         }
         return jsxElements;
+    }
+
+    getProjects() {
+        let processedArray = [];
+        fetch('http://localhost:3000/getprojects')
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                for(let i = 0; i < data.length; i++) {
+                    let p = new Project(data[i].title, data[i].description, data[i].members);
+                    processedArray.push(p);
+                }
+                this.setState({projects: processedArray});
+                this.renderList();
+            })
+            .catch((error) => console.log(error)); 
+        
+    }
+
+    componentDidMount() {
+        this.getProjects();
     }
 
     render() {

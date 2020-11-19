@@ -24,6 +24,12 @@ app.post("/newproject", (req, res) => {
     res.end('OK');
 });
 
+app.post("/deleteproject", (req, res) => {
+    let handler = new dbHandler();
+    handler.deleteProject(req.body.title);
+    res.send('OK');
+});
+
 app.listen(port, () => {
     console.log("Server available at port: " + port);
 });
