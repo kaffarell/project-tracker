@@ -3,6 +3,8 @@ import React from 'react';
 import ProjectList from './components/ProjectList';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
 
 
 class App extends React.Component {
@@ -74,26 +76,47 @@ class App extends React.Component {
 
         return (
             <div className="App">
-                <div className="list">
-                    <ProjectList></ProjectList>
-                </div>
+                <h2>Aktive Interessensgruppen / Projekte</h2>
                 <div className="control">
                     <Button onClick={this.handleShow}>Neues Projekt</Button>
 
                     <Modal show={this.state.showModal} onHide={this.handleClose}>
                         <Modal.Header closeButton>
                         <Modal.Title>
-                            Title: <input value={this.state.inputTitle} 
-                            onChange={(evt) => this.updateTitleInput(evt)}></input>
+                            Title: 
+                            <InputGroup 
+                            value={this.state.inputTitle}
+                            onChange={(evt) => this.updateTitleInput(evt)}
+                            className="mb-3">
+                                <FormControl
+                                placeholder="Title name"
+                                aria-describedby="basic-addon2"
+                                />
+                            </InputGroup>
                         </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            Members: <input value={this.state.inputMembers}
-                            onChange={(evt) => this.updateMembersInput(evt)}></input>
-                        </Modal.Body>
-                        <Modal.Body>
-                            Description: <input value={this.state.inputDescription} 
-                            onChange={(evt) => this.updateDescriptionInput(evt)}></input>
+                            Members: 
+                            <InputGroup 
+                            value={this.state.inputMembers}
+                            onChange={(evt) => this.updateMembersInput(evt)}
+                            className="mb-3">
+                                <FormControl
+                                placeholder="Member names"
+                                aria-describedby="basic-addon2"
+                                />
+                            </InputGroup>
+                            <br />
+                            Description: 
+                            <InputGroup 
+                            value={this.state.inputDescription}
+                            onChange={(evt) => this.updateDescriptionInput(evt)}
+                            className="mb-3">
+                                <FormControl
+                                placeholder="Description text"
+                                aria-describedby="basic-addon2"
+                                />
+                            </InputGroup>
                         </Modal.Body>
                         <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleCancel}>
@@ -104,6 +127,9 @@ class App extends React.Component {
                         </Button>
                         </Modal.Footer>
                     </Modal>
+                </div>
+                <div className="list">
+                    <ProjectList className="projectlist"></ProjectList>
                 </div>
             </div>
         );

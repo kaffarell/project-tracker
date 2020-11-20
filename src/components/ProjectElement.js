@@ -51,14 +51,12 @@ class ProjectElement extends React.Component {
                 <Modal show={this.state.showModal} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                     <Modal.Title>
-                        Title: {this.props.title}
+                        <b>Title: </b> {this.props.title}
                     </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Members: {this.props.members}
-                    </Modal.Body>
-                    <Modal.Body>
-                        Description: {this.props.description}
+                        <b>Members: </b>{this.props.members}<br />
+                        <b>Description:</b> {this.props.description}
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="danger" onClick={this.handleDelete}>

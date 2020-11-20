@@ -1,7 +1,12 @@
 import ProjectElement from './ProjectElement';
 import React from 'react';
 import Project from '../model/project';
-import './ProjectList.css'
+if(window.innerWidth < 500){
+    require('./ProjectList-m.css');
+}else {
+    require('./ProjectList-d.css');
+}
+
 
 class ProjectList extends React.Component {
     constructor(props) {
@@ -53,7 +58,6 @@ class ProjectList extends React.Component {
     render() {
         return (
             <div className="projectlist">
-                <h2>Aktive Interessensgruppen / Projekte</h2>
                 {this.renderList()}
             </div>
         )
